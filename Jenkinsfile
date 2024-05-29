@@ -2,40 +2,50 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh './scripts/build.sh' // Update the path if the script is in a subdirectory
+                // Insert your build commands here
+                // sh 'mvn clean install'
             }
         }
         stage('Test') {
-            steps {
-                echo 'Testing...'
-                sh './scripts/test.sh' // Update the path if the script is in a subdirectory
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        echo 'Running unit tests...'
+                        // Insert your unit test commands here
+                        // sh 'mvn test'
+                    }
+                }
+                stage('Integration Tests') {
+                    steps {
+                        echo 'Running integration tests...'
+                        // Insert your integration test commands here
+                        // sh 'mvn verify'
+                    }
+                }
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                sh './scripts/deploy.sh' // Update the path if the script is in a subdirectory
+                // Insert your deploy commands here
+                // sh 'scp target/myapp.jar user@server:/path/to/deploy'
             }
         }
     }
 
     post {
         always {
-            echo 'This will always run'
+            echo 'Cleaning up...'
+            // Insert cleanup commands here
         }
         success {
-            echo 'This will run only if successful'
+            echo 'Pipeline succeeded!'
         }
         failure {
-            echo 'This will run only if failed'
+            echo 'Pipeline failed!'
         }
     }
 }
