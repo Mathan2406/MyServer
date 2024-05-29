@@ -5,32 +5,21 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                // Insert your build commands here
+                // Insert your build commands here, e.g., shell commands or invoking other tools like Maven, Gradle, etc.
                 // sh 'mvn clean install'
             }
         }
         stage('Test') {
-            parallel {
-                stage('Unit Tests') {
-                    steps {
-                        echo 'Running unit tests...'
-                        // Insert your unit test commands here
-                        // sh 'mvn test'
-                    }
-                }
-                stage('Integration Tests') {
-                    steps {
-                        echo 'Running integration tests...'
-                        // Insert your integration test commands here
-                        // sh 'mvn verify'
-                    }
-                }
+            steps {
+                echo 'Testing...'
+                // Insert your test commands here, e.g., running unit tests or integration tests
+                // sh 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                // Insert your deploy commands here
+                // Insert your deploy commands here, e.g., deploying to a server or a cloud environment
                 // sh 'scp target/myapp.jar user@server:/path/to/deploy'
             }
         }
@@ -39,7 +28,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up...'
-            // Insert cleanup commands here
+            // Insert cleanup commands here, e.g., deleting temporary files or stopping services
         }
         success {
             echo 'Pipeline succeeded!'
