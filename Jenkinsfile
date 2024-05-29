@@ -10,19 +10,19 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh './build.sh' // Example shell script for building
+                sh './scripts/build.sh' // Update the path if the script is in a subdirectory
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh './test.sh' // Example shell script for testing
+                sh './scripts/test.sh' // Update the path if the script is in a subdirectory
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
-                sh './deploy.sh' // Example shell script for deploying
+                sh './scripts/deploy.sh' // Update the path if the script is in a subdirectory
             }
         }
     }
